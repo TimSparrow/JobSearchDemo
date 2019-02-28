@@ -1,0 +1,14 @@
+{
+    "name": "timofey/job-search-demo",
+    "description": "Github jobs api demo",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Timofey Vorobev",
+            "email": "t.vorobyov@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    }
+}
