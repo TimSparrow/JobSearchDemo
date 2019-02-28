@@ -10,10 +10,11 @@ require 'model.php';
 $description = $_REQUEST['description'];
 // check location
 $location = $_REQUEST['location'];
+$fulltime = $_REQUEST['fulltime'];
 // connect api
 $model = new Model();
 // get list of positions
-$aPositionList = $model->getList($description, $location);
+$aPositionList = $model->getList($description, $location, $fulltime);
 // display output
 include 'views/index.php';
 

@@ -11,8 +11,6 @@ class Model {
 	// HTTP client (Guzzle) instance
 	private $client;
 
-
-
 	/**
 	 * Queries Github API for available jobs
 	 * @param String $description
@@ -21,7 +19,7 @@ class Model {
 	 * @throws Exception if the HTTP query fails
 	 * @see GuzzleHttp\Client for details on possible exception types and their usage
 	 */
-	public function getList($description, $location)
+	public function getList($description, $location, $fulltime)
 	{
 		$aOptions = [
 			'base_uri' => static::URL
@@ -31,7 +29,8 @@ class Model {
 		$response = $this->client->get(static::URL, [
 			GuzzleHttp\RequestOptions::QUERY => [
 				'description'	=> $description,
-				'location'		=> $location
+				'location'		=> $location,
+				'fulltime'		=> $fulltime
 			]
 		]);
 		return \GuzzleHttp\json_decode($response->getBody());
