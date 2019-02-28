@@ -15,15 +15,57 @@ class Model {
 	// HTTP client (Guzzle) instance
 	private $client;
 
+	// Query parameters
+	protected $description;
+	protected $location;
+	protected $fulltime;
+
+	// default page size
+	protected $pageSize = 50;
+	protected $page = 0; // default page
+
+	// array to hold fetched data;
+	protected $aPositionList;
+
+	public function setPageSize(int $size)
+	{
+		$this->pageSize = $size;
+		return $this;
+	}
+
+	public function setPage($page)
+	{
+		$this->page = $page;
+		return $this;
+	}
+
+	public function setDescription(String $description)
+	{
+		$this->description = $description;
+		return $this;
+	}
+
+	public function setLocation(String $location)
+	{
+		$this->location = $location;
+		return $this;
+	}
+
+	public function setFulltime($fulltime)
+	{
+		$this->fulltime = $fulltime;
+		return $this;
+	}
+
+
+
 	/**
 	 * Queries Github API for available jobs
-	 * @param String $description
-	 * @param String $location
 	 * @return Array
 	 * @throws Exception if the HTTP query fails
 	 * @see Client for details on possible exception types and their usage
 	 */
-	public function getList($description, $location, $fulltime)
+	public function fetch()
 	{
 		$aOptions = [
 			'base_uri' => static::URL
@@ -32,11 +74,18 @@ class Model {
 		$this->client = new Client($aOptions);
 		$response = $this->client->get(static::URL, [
 			RequestOptions::QUERY => [
-				'description'	=> $description,
-				'location'		=> $location,
-				'fulltime'		=> $fulltime
+				'description'	=> $this->description,
+				'location'		=> $this->location,
+				'fulltime'		=> $this->fulltime,
+				'page'			=> $this->page
 			]
 		]);
-		return json_decode($response->getBody());
+		$this->aPositionList = json_decode($response->getBody());
+		return $this;
+	}
+
+	public function getList()
+	{
+		return $this->aPositionList;
 	}
 }

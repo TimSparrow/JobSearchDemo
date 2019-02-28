@@ -10,12 +10,18 @@ require 'model.php';
 $description = $_REQUEST['description'];
 // check location
 $location = $_REQUEST['location'];
-$fulltime = $_REQUEST['fulltime'];
+$fulltime = $_REQUEST['full_time'];
+$page = intval($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
 // connect api
 $model = new Model();
 // get list of positions
 try {
-	$aPositionList = $model->getList($description, $location, $fulltime);
+	$aPositionList = $model
+		->setDescription($description)
+		->setLocation($location)
+		->setFulltime($fulltime)
+		->setPage($page)
+		->fetch()->getList();
 }
 catch (\Exception $x)
 {
