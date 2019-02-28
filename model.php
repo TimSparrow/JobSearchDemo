@@ -61,7 +61,7 @@ class Model {
 
 	/**
 	 * Queries Github API for available jobs
-	 * @return Array
+	 * @return $this
 	 * @throws Exception if the HTTP query fails
 	 * @see Client for details on possible exception types and their usage
 	 */
@@ -84,8 +84,24 @@ class Model {
 		return $this;
 	}
 
+	/**
+	 * Returns an array of entries (current page retrieved)
+	 * @return Array
+	 */
 	public function getList()
 	{
 		return $this->aPositionList;
+	}
+
+	/**
+	 * Returns a link to the next page
+	 * @return type
+	 */
+	public function getNextPageLink()
+	{
+		$nextPageCount = $this->page + 1;
+		// $_SERVER is used for the demo, an engine will typically provide a construct for self url
+		return $_SERVER['SCRIPT_NAME'] . '?description='.$this->description
+			.'&location='.$this->location . '&full_time='.$this->fulltime . '&page='.$nextPageCount;
 	}
 }

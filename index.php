@@ -22,6 +22,7 @@ try {
 		->setFulltime($fulltime)
 		->setPage($page)
 		->fetch()->getList();
+	$nextPage = $model->getNextPageLink();
 }
 catch (\Exception $x)
 {

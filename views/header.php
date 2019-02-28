@@ -1,3 +1,8 @@
+<?php
+/**
+ * view to display the search form
+ */
+?>
 <div id="search" class="clearfix">
 
 	<form class="positions" action="/positions" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">

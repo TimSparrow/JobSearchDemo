@@ -9,8 +9,6 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>Job search demo</title>
 		<link rel="stylesheet" href="page.css"/>
-			<script src="https://unpkg.com/@material-ui/core/umd/material-ui.production.min.js" crossorigin="anonymous"></script>
-			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
 
 
     </head>
