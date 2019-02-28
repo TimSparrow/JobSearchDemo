@@ -14,7 +14,14 @@ $fulltime = $_REQUEST['fulltime'];
 // connect api
 $model = new Model();
 // get list of positions
-$aPositionList = $model->getList($description, $location, $fulltime);
+try {
+	$aPositionList = $model->getList($description, $location, $fulltime);
+}
+catch (\Exception $x)
+{
+	$error = $x->getMessage();
+	trigger_error($x->getMessage(), E_USER_WARNING);
+}
 // display output
 include 'views/index.php';
 

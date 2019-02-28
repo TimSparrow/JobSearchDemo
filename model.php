@@ -1,5 +1,9 @@
 <?php
 
+use GuzzleHttp\Client;					// HTTP Client library with transparent cUrl support
+use GuzzleHttp\RequestOptions;			// Constants to define HTTP client options
+use function GuzzleHttp\json_decode;	// throws exception if input stream is not JSON
+
 /*
  * The model class is responsible for handling GitHub API requests
  */
@@ -17,7 +21,7 @@ class Model {
 	 * @param String $location
 	 * @return Array
 	 * @throws Exception if the HTTP query fails
-	 * @see GuzzleHttp\Client for details on possible exception types and their usage
+	 * @see Client for details on possible exception types and their usage
 	 */
 	public function getList($description, $location, $fulltime)
 	{
@@ -25,14 +29,14 @@ class Model {
 			'base_uri' => static::URL
 		];
 
-		$this->client = new GuzzleHttp\Client($aOptions);
+		$this->client = new Client($aOptions);
 		$response = $this->client->get(static::URL, [
-			GuzzleHttp\RequestOptions::QUERY => [
+			RequestOptions::QUERY => [
 				'description'	=> $description,
 				'location'		=> $location,
 				'fulltime'		=> $fulltime
 			]
 		]);
-		return \GuzzleHttp\json_decode($response->getBody());
+		return json_decode($response->getBody());
 	}
 }
